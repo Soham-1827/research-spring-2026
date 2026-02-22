@@ -1,0 +1,202 @@
+{
+  "main": {
+    "id": "82c888f56f8577db",
+    "type": "split",
+    "children": [
+      {
+        "id": "c5dc93d9fef69298",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ec94e2a582116285",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "research/STACK.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "STACK"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "9e65c0264e417b6b",
+    "type": "split",
+    "children": [
+      {
+        "id": "6a21a47d9634c49a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d0ef59bfa8eaaaf1",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "fe9bf46355f0ad73",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "8d5b48a644f65b87",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "07d804a0f6af803a",
+    "type": "split",
+    "children": [
+      {
+        "id": "f69d90887e858990",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ae2be1520d22951a",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "research/STACK.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for STACK"
+            }
+          },
+          {
+            "id": "3e5940900ed71b4c",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "research/STACK.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from STACK"
+            }
+          },
+          {
+            "id": "8ec12384c7780c42",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "3d9721b2d407b6cc",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "84bcd98ed87e5c9f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "research/STACK.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of STACK"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "ec94e2a582116285",
+  "lastOpenFiles": [
+    "research/SUMMARY.md",
+    "research/SUMMARY.md.tmp.1621.1771799713643",
+    "research/ARCHITECTURE.md.tmp.1621.1771799555524",
+    "research/PITFALLS.md",
+    "research/PITFALLS.md.tmp.1621.1771799481063",
+    "research/ARCHITECTURE.md",
+    "research/FEATURES.md",
+    "PROJECT.md",
+    "research/FEATURES.md.tmp.1621.1771799307637",
+    "research/STACK.md",
+    "research/STACK.md.tmp.1621.1771799194483",
+    "research",
+    "config.json"
+  ]
+}
