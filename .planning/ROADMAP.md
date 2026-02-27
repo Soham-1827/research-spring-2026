@@ -28,11 +28,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. Each event produces 3 time window snapshots (T-7d, T-1d, T-1h) with correct market prices per window
   3. A contamination check prompt can be run against the LLM for any event, and the result indicates whether the model likely knows the outcome
   4. A curated 15-event benchmark dataset exists with documented selection methodology, and all events pass schema validation
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: TBD
-- [ ] 01-02: TBD
+- [ ] 01-01-PLAN.md -- Project scaffolding, Pydantic models (Event/EventSnapshot), loader, slicer, CLI load command
+- [ ] 01-02-PLAN.md -- Contamination check module with scoring logic and CLI contamination-check command
+- [ ] 01-03-PLAN.md -- Kalshi API fetcher, benchmark dataset curation (15 events), methodology documentation
 
 ### Phase 2: Persona Engine
 **Goal**: Researcher can define, inspect, and modify behavioral bias personas without touching Python code
@@ -85,7 +86,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Data Foundation | 0/TBD | Not started | - |
+| 1. Data Foundation | 0/3 | Planning complete | - |
 | 2. Persona Engine | 0/TBD | Not started | - |
 | 3. Simulation Engine | 0/TBD | Not started | - |
 | 4. Portfolio & Evaluation | 0/TBD | Not started | - |
