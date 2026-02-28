@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "description": "Sample events for testing the data pipeline. Prices are approximate; real candlestick prices will be fetched in Plan 01-03.",
+    "total_events": 2,
+    "created": "2026-02-28",
+    "source": "Kalshi API (api.elections.kalshi.com)"
+  },
+  "events": [
+    {
+      "event_ticker": "GDP-24OCT30",
+      "market_ticker": "GDP-24OCT30-T2.9",
+      "series_ticker": "GDP",
+      "title": "US Q3 2024 real GDP growth rate",
+      "question": "Will real GDP increase by more than 2.9% in Q3 2024?",
+      "description": "Bureau of Economic Analysis advance estimate of Q3 2024 real GDP annualized growth rate, released October 30, 2024.",
+      "category": "economics",
+      "outcome": "no",
+      "close_time": "2024-10-30T12:25:00+00:00",
+      "open_time": "2024-09-01T00:00:00+00:00",
+      "window_prices": {
+        "T-7d": 55,
+        "T-1d": 61,
+        "T-1h": 63
+      }
+    },
+    {
+      "event_ticker": "GDP-24JUL25",
+      "market_ticker": "GDP-24JUL25-T2.4",
+      "series_ticker": "GDP",
+      "title": "US Q2 2024 real GDP growth rate",
+      "question": "Will real GDP increase by more than 2.4% in Q2 2024?",
+      "description": "Bureau of Economic Analysis advance estimate of Q2 2024 real GDP annualized growth rate, released July 25, 2024.",
+      "category": "economics",
+      "outcome": "yes",
+      "close_time": "2024-07-25T12:25:00+00:00",
+      "open_time": "2024-06-01T00:00:00+00:00",
+      "window_prices": {
+        "T-7d": 38,
+        "T-1d": 42,
+        "T-1h": 45
+      }
+    }
+  ]
+}
