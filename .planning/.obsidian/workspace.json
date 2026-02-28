@@ -185,6 +185,14 @@
   },
   "active": "ec94e2a582116285",
   "lastOpenFiles": [
+    "phases/01-data-foundation",
+    "phases",
+    "STATE.md",
+    "STATE.md.tmp.1621.1771800231958",
+    "ROADMAP.md",
+    "ROADMAP.md.tmp.1621.1771800209446",
+    "REQUIREMENTS.md",
+    "REQUIREMENTS.md.tmp.1621.1771800098035",
     "research/SUMMARY.md",
     "research/SUMMARY.md.tmp.1621.1771799713643",
     "research/ARCHITECTURE.md.tmp.1621.1771799555524",
@@ -196,7 +204,6 @@
     "research/FEATURES.md.tmp.1621.1771799307637",
     "research/STACK.md",
     "research/STACK.md.tmp.1621.1771799194483",
-    "research",
-    "config.json"
+    "research"
   ]
 }
