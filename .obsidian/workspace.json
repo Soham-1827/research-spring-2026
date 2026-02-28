@@ -1,24 +1,20 @@
 {
   "main": {
-    "id": "82c888f56f8577db",
+    "id": "546bfdb99c48ffbf",
     "type": "split",
     "children": [
       {
-        "id": "c5dc93d9fef69298",
+        "id": "51fb9263cde3c682",
         "type": "tabs",
         "children": [
           {
-            "id": "ec94e2a582116285",
+            "id": "a904b5ce23552c2c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "PROJECT.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "PROJECT"
+              "title": "New tab"
             }
           }
         ]
@@ -27,15 +23,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "9e65c0264e417b6b",
+    "id": "a8c66b5900c2274c",
     "type": "split",
     "children": [
       {
-        "id": "6a21a47d9634c49a",
+        "id": "8e02dd2f641021be",
         "type": "tabs",
         "children": [
           {
-            "id": "d0ef59bfa8eaaaf1",
+            "id": "d1179628fa4f2ce1",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -48,7 +44,7 @@
             }
           },
           {
-            "id": "fe9bf46355f0ad73",
+            "id": "7488ad4cb486d2f0",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -65,7 +61,7 @@
             }
           },
           {
-            "id": "8d5b48a644f65b87",
+            "id": "f90be0d603309618",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -74,28 +70,26 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
     "width": 300
   },
   "right": {
-    "id": "07d804a0f6af803a",
+    "id": "7079fef3f7ffb38c",
     "type": "split",
     "children": [
       {
-        "id": "f69d90887e858990",
+        "id": "da72d721bcd34075",
         "type": "tabs",
         "children": [
           {
-            "id": "ae2be1520d22951a",
+            "id": "27ce3d89fe448d76",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "research/STACK.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,25 +99,24 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for STACK"
+              "title": "Backlinks"
             }
           },
           {
-            "id": "3e5940900ed71b4c",
+            "id": "064b984969f9820d",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "research/STACK.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from STACK"
+              "title": "Outgoing links"
             }
           },
           {
-            "id": "8ec12384c7780c42",
+            "id": "d7570dde2b9d8e18",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -138,7 +131,7 @@
             }
           },
           {
-            "id": "3d9721b2d407b6cc",
+            "id": "e9ff92ab9c597415",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -152,18 +145,17 @@
             }
           },
           {
-            "id": "84bcd98ed87e5c9f",
+            "id": "9dd4bc7152ae1b08",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "research/STACK.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of STACK"
+              "title": "Outline"
             }
           }
         ]
@@ -184,30 +176,6 @@
       "bases:Create new base": false
     }
   },
-  "active": "fe9bf46355f0ad73",
-  "lastOpenFiles": [
-    "phases/01-data-foundation/01-RESEARCH.md",
-    "phases/01-data-foundation/01-03-PLAN.md",
-    "phases/01-data-foundation/01-02-PLAN.md",
-    "phases/01-data-foundation/01-01-PLAN.md",
-    "REQUIREMENTS.md",
-    "PROJECT.md",
-    "research/ARCHITECTURE.md",
-    "research/STACK.md",
-    "phases/01-data-foundation",
-    "phases",
-    "STATE.md",
-    "STATE.md.tmp.1621.1771800231958",
-    "ROADMAP.md",
-    "ROADMAP.md.tmp.1621.1771800209446",
-    "REQUIREMENTS.md.tmp.1621.1771800098035",
-    "research/SUMMARY.md",
-    "research/SUMMARY.md.tmp.1621.1771799713643",
-    "research/ARCHITECTURE.md.tmp.1621.1771799555524",
-    "research/PITFALLS.md",
-    "research/PITFALLS.md.tmp.1621.1771799481063",
-    "research/FEATURES.md",
-    "research/FEATURES.md.tmp.1621.1771799307637",
-    "research/STACK.md.tmp.1621.1771799194483"
-  ]
+  "active": "a904b5ce23552c2c",
+  "lastOpenFiles": []
 }

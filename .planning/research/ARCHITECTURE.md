@@ -1,4 +1,5 @@
 # Architecture Research
+this is all related to [[FEATURES]], [[PITFALLS]], [[STACK]], [[SUMMARY]]
 
 **Domain:** LLM multi-agent ensemble / prediction market simulation (Python CLI)
 **Researched:** 2026-02-22
