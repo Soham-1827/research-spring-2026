@@ -78,7 +78,7 @@ class TestBenchmarkDataset:
             for window in TimeWindowLabel:
                 if window in event.window_prices:
                     snap = event.snapshot(window)
-                    snap_fields = set(snap.model_fields.keys())
+                    snap_fields = set(type(snap).model_fields.keys())
                     leaked = snap_fields & forbidden
                     assert leaked == set(), (
                         f"Snapshot for {event.event_ticker}/{window.value} "
