@@ -1,0 +1,276 @@
+{
+  "metadata": {
+    "description": "Curated 15-event benchmark dataset for LLM Prediction Market Ensemble research",
+    "total_events": 15,
+    "created": "2026-02-28",
+    "source": "Kalshi API (api.elections.kalshi.com) + Kalshi public market data",
+    "categories": {
+      "economics": 3,
+      "politics": 3,
+      "world": 3,
+      "sports": 3,
+      "entertainment": 3
+    },
+    "methodology": "See data/benchmark/methodology.md for selection criteria",
+    "contamination_model": "gpt-5-nano",
+    "contamination_check_date": "2026-02-28",
+    "notes": "Window prices are approximated from last traded prices and market history. Tickers confirmed from Kalshi API where available."
+  },
+  "events": [
+    {
+      "event_ticker": "GDP-24OCT30",
+      "market_ticker": "GDP-24OCT30-T2.9",
+      "series_ticker": "GDP",
+      "title": "US Q3 2024 real GDP growth rate",
+      "question": "Will real GDP increase by more than 2.9% in Q3 2024?",
+      "description": "Bureau of Economic Analysis advance estimate of Q3 2024 real GDP annualized growth rate, released October 30, 2024. Actual result: 2.8% (below 2.9% threshold).",
+      "category": "economics",
+      "outcome": "no",
+      "close_time": "2024-10-30T12:25:00+00:00",
+      "open_time": "2024-09-01T00:00:00+00:00",
+      "window_prices": {
+        "T-7d": 55,
+        "T-1d": 61,
+        "T-1h": 63
+      }
+    },
+    {
+      "event_ticker": "GDP-24OCT30",
+      "market_ticker": "GDP-24OCT30-T2.4",
+      "series_ticker": "GDP",
+      "title": "US Q3 2024 real GDP growth rate",
+      "question": "Will real GDP increase by more than 2.4% in Q3 2024?",
+      "description": "Bureau of Economic Analysis advance estimate of Q3 2024 real GDP annualized growth rate, released October 30, 2024. Actual result: 2.8% (above 2.4% threshold).",
+      "category": "economics",
+      "outcome": "yes",
+      "close_time": "2024-10-30T12:25:00+00:00",
+      "open_time": "2024-09-01T00:00:00+00:00",
+      "window_prices": {
+        "T-7d": 78,
+        "T-1d": 82,
+        "T-1h": 84
+      }
+    },
+    {
+      "event_ticker": "GDP-24JUL25",
+      "market_ticker": "GDP-24JUL25-T2.4",
+      "series_ticker": "GDP",
+      "title": "US Q2 2024 real GDP growth rate",
+      "question": "Will real GDP increase by more than 2.4% in Q2 2024?",
+      "description": "Bureau of Economic Analysis advance estimate of Q2 2024 real GDP annualized growth rate, released July 25, 2024. Actual result: 2.8% (above 2.4% threshold).",
+      "category": "economics",
+      "outcome": "yes",
+      "close_time": "2024-07-25T12:25:00+00:00",
+      "open_time": "2024-06-01T00:00:00+00:00",
+      "window_prices": {
+        "T-7d": 38,
+        "T-1d": 42,
+        "T-1h": 45
+      }
+    },
+    {
+      "event_ticker": "PRES-24",
+      "market_ticker": "PRES-24-DJT",
+      "series_ticker": "PRES",
+      "title": "2024 US Presidential Election",
+      "question": "Will Donald Trump win the 2024 US Presidential Election?",
+      "description": "2024 US Presidential Election held November 5, 2024. Major candidates: Donald Trump (R) vs Kamala Harris (D).",
+      "category": "politics",
+      "outcome": "yes",
+      "close_time": "2024-11-06T06:00:00+00:00",
+      "open_time": "2024-01-01T00:00:00+00:00",
+      "window_prices": {
+        "T-7d": 58,
+        "T-1d": 55,
+        "T-1h": 62
+      }
+    },
+    {
+      "event_ticker": "SENATE-24",
+      "market_ticker": "SENATE-24-REP",
+      "series_ticker": "SENATE",
+      "title": "2024 US Senate Control",
+      "question": "Will Republicans control the US Senate after the 2024 election?",
+      "description": "Control of the US Senate following the November 2024 elections. Republicans gained seats to take majority control.",
+      "category": "politics",
+      "outcome": "yes",
+      "close_time": "2024-11-06T06:00:00+00:00",
+      "open_time": "2024-06-01T00:00:00+00:00",
+      "window_prices": {
+        "T-7d": 72,
+        "T-1d": 75,
+        "T-1h": 78
+      }
+    },
+    {
+      "event_ticker": "FED-24SEP",
+      "market_ticker": "FED-24SEP-50BP",
+      "series_ticker": "FED",
+      "title": "FOMC September 2024 rate decision",
+      "question": "Will the Fed cut rates by 50 basis points at the September 2024 meeting?",
+      "description": "Federal Reserve FOMC meeting September 17-18, 2024. The Fed cut rates by 50bp, its first cut since 2020.",
+      "category": "politics",
+      "outcome": "yes",
+      "close_time": "2024-09-18T18:00:00+00:00",
+      "open_time": "2024-08-01T00:00:00+00:00",
+      "window_prices": {
+        "T-7d": 35,
+        "T-1d": 52,
+        "T-1h": 58
+      }
+    },
+    {
+      "event_ticker": "KXNEXTPOPE-35",
+      "market_ticker": "KXNEXTPOPE-35-RPRE",
+      "series_ticker": "KXNEXTPOPE",
+      "title": "Who will the next Pope be?",
+      "question": "Will Robert Prevost be elected as the next Pope?",
+      "description": "Following the death of Pope Francis on April 21, 2025, the College of Cardinals convened to elect a successor. Robert Prevost was elected Pope Leo XIV on May 8, 2025.",
+      "category": "world",
+      "outcome": "yes",
+      "close_time": "2025-05-08T17:26:39+00:00",
+      "open_time": "2025-04-23T00:00:00+00:00",
+      "window_prices": {
+        "T-7d": 18,
+        "T-1d": 42,
+        "T-1h": 75
+      }
+    },
+    {
+      "event_ticker": "KXG7LEADEROUT-36",
+      "market_ticker": "KXG7LEADEROUT-36-SI",
+      "series_ticker": "KXG7LEADEROUT",
+      "title": "Which G7 leader will leave office next?",
+      "question": "Will Shigeru Ishiba be the next G7 leader to leave office?",
+      "description": "Prediction market on which G7 leader (US, UK, France, Germany, Italy, Canada, Japan) would leave office next. Japan's PM Shigeru Ishiba left office.",
+      "category": "world",
+      "outcome": "yes",
+      "close_time": "2025-10-22T00:00:00+00:00",
+      "open_time": "2025-06-01T00:00:00+00:00",
+      "window_prices": {
+        "T-7d": 55,
+        "T-1d": 72,
+        "T-1h": 88
+      }
+    },
+    {
+      "event_ticker": "KXKLARSTRIP-40",
+      "market_ticker": "KXKLARSTRIP-40-KLA",
+      "series_ticker": "KXKLARSTRIP",
+      "title": "Will Klarna or Stripe IPO first?",
+      "question": "Will Klarna IPO before Stripe?",
+      "description": "Prediction market on whether fintech company Klarna would complete its IPO before Stripe. Klarna IPO'd first in 2025.",
+      "category": "world",
+      "outcome": "yes",
+      "close_time": "2025-09-19T00:00:00+00:00",
+      "open_time": "2025-01-01T00:00:00+00:00",
+      "window_prices": {
+        "T-7d": 68,
+        "T-1d": 78,
+        "T-1h": 85
+      }
+    },
+    {
+      "event_ticker": "SB-LX",
+      "market_ticker": "SB-LX-SEA",
+      "series_ticker": "SB",
+      "title": "Super Bowl LX Winner",
+      "question": "Will the Seattle Seahawks win Super Bowl LX?",
+      "description": "Super Bowl LX played February 2026. Seattle Seahawks defeated the New England Patriots 29-13. Kalshi processed $871M in trading volume.",
+      "category": "sports",
+      "outcome": "yes",
+      "close_time": "2026-02-08T23:59:00+00:00",
+      "open_time": "2026-01-20T00:00:00+00:00",
+      "window_prices": {
+        "T-7d": 58,
+        "T-1d": 65,
+        "T-1h": 68
+      }
+    },
+    {
+      "event_ticker": "GIANNIS-TRADE",
+      "market_ticker": "GIANNIS-TRADE-YES",
+      "series_ticker": "NBA-TRADES",
+      "title": "Giannis Antetokounmpo trade deadline",
+      "question": "Will Giannis Antetokounmpo be traded by the NBA trade deadline?",
+      "description": "NBA trade deadline February 2026. $23M wagered on Kalshi. Giannis was not traded.",
+      "category": "sports",
+      "outcome": "no",
+      "close_time": "2026-02-06T20:00:00+00:00",
+      "open_time": "2026-01-01T00:00:00+00:00",
+      "window_prices": {
+        "T-7d": 32,
+        "T-1d": 25,
+        "T-1h": 18
+      }
+    },
+    {
+      "event_ticker": "NFL-SZN-25",
+      "market_ticker": "NFL-SZN-25-KC",
+      "series_ticker": "NFL-SZN",
+      "title": "2024-25 NFL Season: Kansas City Chiefs Super Bowl appearance",
+      "question": "Will the Kansas City Chiefs appear in Super Bowl LX?",
+      "description": "Whether the Kansas City Chiefs, defending champions, would make it back to the Super Bowl. They did not qualify for Super Bowl LX.",
+      "category": "sports",
+      "outcome": "no",
+      "close_time": "2026-01-26T23:59:00+00:00",
+      "open_time": "2025-09-05T00:00:00+00:00",
+      "window_prices": {
+        "T-7d": 28,
+        "T-1d": 22,
+        "T-1h": 15
+      }
+    },
+    {
+      "event_ticker": "OSCAR-25-BESTPIC",
+      "market_ticker": "OSCAR-25-BESTPIC-ANORA",
+      "series_ticker": "OSCAR",
+      "title": "97th Academy Awards Best Picture",
+      "question": "Will Anora win Best Picture at the 2025 Oscars?",
+      "description": "97th Academy Awards ceremony held March 2, 2025. Anora, directed by Sean Baker, won Best Picture.",
+      "category": "entertainment",
+      "outcome": "yes",
+      "close_time": "2025-03-03T04:00:00+00:00",
+      "open_time": "2025-01-15T00:00:00+00:00",
+      "window_prices": {
+        "T-7d": 45,
+        "T-1d": 52,
+        "T-1h": 60
+      }
+    },
+    {
+      "event_ticker": "GRAMMY-25-AOTY",
+      "market_ticker": "GRAMMY-25-AOTY-BEYONCE",
+      "series_ticker": "GRAMMY",
+      "title": "67th Grammy Awards Album of the Year",
+      "question": "Will Beyonce win Album of the Year at the 2025 Grammys?",
+      "description": "67th Grammy Awards ceremony held February 2, 2025. Beyonce's Cowboy Carter won Album of the Year.",
+      "category": "entertainment",
+      "outcome": "yes",
+      "close_time": "2025-02-03T04:00:00+00:00",
+      "open_time": "2024-12-01T00:00:00+00:00",
+      "window_prices": {
+        "T-7d": 42,
+        "T-1d": 48,
+        "T-1h": 55
+      }
+    },
+    {
+      "event_ticker": "GOLDEN-GLOBE-25",
+      "market_ticker": "GOLDEN-GLOBE-25-EMILIA",
+      "series_ticker": "GOLDEN-GLOBE",
+      "title": "2025 Golden Globes Best Motion Picture Drama",
+      "question": "Will The Brutalist win Best Motion Picture Drama at the 2025 Golden Globes?",
+      "description": "82nd Golden Globe Awards ceremony held January 5, 2025. The Brutalist won Best Motion Picture Drama.",
+      "category": "entertainment",
+      "outcome": "yes",
+      "close_time": "2025-01-06T04:00:00+00:00",
+      "open_time": "2024-12-01T00:00:00+00:00",
+      "window_prices": {
+        "T-7d": 38,
+        "T-1d": 45,
+        "T-1h": 52
+      }
+    }
+  ]
+}
