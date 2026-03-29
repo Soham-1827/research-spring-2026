@@ -11,6 +11,8 @@ from __future__ import annotations
 from datetime import datetime, timedelta
 from enum import Enum
 
+from typing import Literal
+
 from pydantic import BaseModel, Field
 
 
@@ -47,6 +49,52 @@ class EventSnapshot(BaseModel):
     no_price_cents: int = Field(description="Market NO price in cents (0-100), always 100 - yes_price_cents")
     window: TimeWindowLabel
     snapshot_timestamp: datetime
+
+
+class Action(str, Enum):
+    """Trading actions a persona can take."""
+
+    BUY_YES = "BUY_YES"
+    BUY_NO = "BUY_NO"
+    SKIP = "SKIP"
+
+
+class PersonaDecision(BaseModel):
+    """Structured decision from a single persona -- used as OpenAI response_format.
+
+    This is the schema that gpt-5-nano returns via structured outputs.
+    """
+
+    action: Action = Field(description="BUY_YES, BUY_NO, or SKIP")
+    stake_dollars: float = Field(
+        ge=0, description="Dollar amount to stake (0 if SKIP)"
+    )
+    reasoning: str = Field(description="Why this decision reflects the persona's bias")
+
+
+class DecisionRecord(BaseModel):
+    """A serialized decision with full context for decisions.jsonl."""
+
+    event_ticker: str
+    market_ticker: str
+    window: TimeWindowLabel
+    persona_id: str
+    persona_name: str
+    action: Action
+    stake_dollars: float
+    reasoning: str
+    yes_price_cents: int
+    no_price_cents: int
+    timestamp: datetime
+
+
+class RevealRecord(BaseModel):
+    """Reveal phase log: all persona positions for one event+window."""
+
+    event_ticker: str
+    window: TimeWindowLabel
+    decisions: list[DecisionRecord]
+    timestamp: datetime
 
 
 class MarketCandle(BaseModel):

@@ -9,7 +9,7 @@ from rich.table import Table
 
 from ensemble.contamination import check_all_events, score_contamination
 from ensemble.loader import load_events
-from ensemble.models import Event, TimeWindowLabel
+from ensemble.models import Action, DecisionRecord, Event, TimeWindowLabel
 from ensemble.personas import load_personas, render_system_prompt, render_user_prompt
 
 app = typer.Typer(name="ensemble", help="LLM Prediction Market Ensemble")
@@ -58,6 +58,106 @@ def load(
 
     console.print(table)
     console.print(f"\n[bold]{len(events)} events loaded, {snapshot_count} snapshots generated[/bold]")
+
+
+@app.command()
+def simulate(
+    events_file: Path = typer.Argument(..., help="Path to events JSON file"),
+    personas_config: Path = typer.Option("prompts/personas.yaml", "--personas", help="Personas YAML config"),
+    output: Path = typer.Option("output/decisions.jsonl", "--output", help="Output JSONL file"),
+    model: str = typer.Option("gpt-5-nano", "--model", help="Model to use for simulation"),
+    balance: float = typer.Option(100.0, "--balance", help="Starting balance per persona"),
+    dry_run: bool = typer.Option(False, "--dry-run", help="Show what would be simulated without calling API"),
+) -> None:
+    """Run blind-then-reveal simulation across all events and personas."""
+    from ensemble.simulator import simulate_all
+
+    events = load_events(events_file)
+    personas = load_personas(personas_config)
+
+    if dry_run:
+        console.print("[bold]Dry run — simulation plan:[/bold]\n")
+        console.print(f"  Events: {len(events)}")
+        console.print(f"  Personas: {len(personas)}")
+        console.print(f"  Windows per event: {len(TimeWindowLabel)}")
+        total_calls = len(events) * len(personas) * len(TimeWindowLabel)
+        console.print(f"  Total LLM calls: {total_calls}")
+        console.print(f"  Starting balance: ${balance:.2f}")
+        console.print(f"  Model: {model}")
+        console.print(f"  Output: {output}\n")
+        console.print("[bold]Personas:[/bold]")
+        for p in personas:
+            console.print(f"  {p.id}: {p.name} ({p.bias_type})")
+        console.print(f"\n[bold]Events:[/bold]")
+        for e in events:
+            console.print(f"  {e.event_ticker}: {e.title[:50]}")
+        return
+
+    def on_event_start(i: int, event: Event) -> None:
+        console.print(f"\n[bold cyan]Event {i+1}/{len(events)}: {event.event_ticker}[/bold cyan]")
+        console.print(f"  {event.title[:60]}")
+
+    def on_decisions(window: TimeWindowLabel, records: list[DecisionRecord]) -> None:
+        console.print(f"\n  [magenta]{window.value}[/magenta] — Blind phase complete:")
+        for r in records:
+            action_style = {"BUY_YES": "green", "BUY_NO": "red", "SKIP": "dim"}.get(r.action.value, "white")
+            console.print(
+                f"    [{action_style}]{r.action.value:7s}[/{action_style}] "
+                f"${r.stake_dollars:6.2f}  {r.persona_name}"
+            )
+
+    def on_event_complete(event: Event, records: list[DecisionRecord]) -> None:
+        console.print(f"\n  [bold]Per-market summary for {event.event_ticker}:[/bold]")
+        # Group by persona
+        by_persona: dict[str, list[DecisionRecord]] = {}
+        for r in records:
+            by_persona.setdefault(r.persona_id, []).append(r)
+
+        table = Table(show_header=True, box=None, pad_edge=False)
+        table.add_column("Persona", style="cyan")
+        table.add_column("Window", style="magenta")
+        table.add_column("Action")
+        table.add_column("Stake", justify="right")
+
+        for pid, precs in by_persona.items():
+            for r in precs:
+                action_style = {"BUY_YES": "green", "BUY_NO": "red", "SKIP": "dim"}.get(r.action.value, "white")
+                table.add_row(
+                    r.persona_name,
+                    r.window.value,
+                    f"[{action_style}]{r.action.value}[/{action_style}]",
+                    f"${r.stake_dollars:.2f}",
+                )
+        console.print(table)
+
+    console.print(f"[bold]Starting simulation: {len(events)} events x {len(personas)} personas[/bold]")
+    console.print(f"  Model: {model}, Balance: ${balance:.2f}, Output: {output}\n")
+
+    all_records = asyncio.run(
+        simulate_all(
+            events=events,
+            personas=personas,
+            output_path=output,
+            model=model,
+            starting_balance=balance,
+            on_event_start=on_event_start,
+            on_decisions=on_decisions,
+            on_event_complete=on_event_complete,
+        )
+    )
+
+    console.print(f"\n[bold green]Simulation complete![/bold green]")
+    console.print(f"  {len(all_records)} decisions written to {output}")
+
+    # Summary stats
+    actions = {a.value: 0 for a in Action}
+    for r in all_records:
+        actions[r.action.value] += 1
+    console.print(
+        f"  Actions: [green]{actions['BUY_YES']} YES[/green], "
+        f"[red]{actions['BUY_NO']} NO[/red], "
+        f"[dim]{actions['SKIP']} SKIP[/dim]"
+    )
 
 
 @app.command(name="contamination-check")
