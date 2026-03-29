@@ -10,6 +10,7 @@ from rich.table import Table
 from ensemble.contamination import check_all_events, score_contamination
 from ensemble.loader import load_events
 from ensemble.models import Event, TimeWindowLabel
+from ensemble.personas import load_personas, render_system_prompt, render_user_prompt
 
 app = typer.Typer(name="ensemble", help="LLM Prediction Market Ensemble")
 console = Console()
@@ -106,6 +107,57 @@ def contamination_check(
         f"[yellow]{counts['FLAG']} FLAG[/yellow], "
         f"[red]{counts['EXCLUDE']} EXCLUDE[/red][/bold]"
     )
+
+
+@app.command()
+def personas(
+    config: Path = typer.Option("prompts/personas.yaml", "--config", help="Path to personas YAML"),
+    persona_id: str = typer.Option(None, "--id", help="Show details for a specific persona"),
+    render: bool = typer.Option(False, "--render", help="Render sample system prompt for each persona"),
+) -> None:
+    """List and inspect behavioral bias personas."""
+    from ensemble.personas import get_persona
+
+    all_personas = load_personas(config)
+
+    if persona_id:
+        try:
+            p = get_persona(persona_id, config)
+        except KeyError as e:
+            console.print(f"[red]{e}[/red]")
+            raise typer.Exit(1)
+
+        console.print(f"\n[bold cyan]{p.name}[/bold cyan] ({p.id})")
+        console.print(f"  Bias type: {p.bias_type}")
+        console.print(f"  Description: {p.description}")
+        console.print(f"  Traits:")
+        for trait in p.traits:
+            console.print(f"    - {trait}")
+
+        if render:
+            console.print(f"\n[bold]Rendered system prompt:[/bold]\n")
+            prompt = render_system_prompt(p, balance=100.0)
+            console.print(prompt)
+        return
+
+    table = Table(title="Behavioral Bias Personas")
+    table.add_column("ID", style="cyan")
+    table.add_column("Name", style="bold")
+    table.add_column("Bias Type", style="magenta")
+    table.add_column("Traits", justify="right")
+    table.add_column("Template")
+
+    for p in all_personas:
+        table.add_row(p.id, p.name, p.bias_type, str(len(p.traits)), p.system_template)
+
+    console.print(table)
+    console.print(f"\n[bold]{len(all_personas)} personas loaded[/bold]")
+
+    if render:
+        for p in all_personas:
+            console.print(f"\n[bold cyan]--- {p.name} ---[/bold cyan]\n")
+            prompt = render_system_prompt(p, balance=100.0)
+            console.print(prompt)
 
 
 @app.command()

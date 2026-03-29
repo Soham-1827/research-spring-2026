@@ -1,0 +1,22 @@
+## Market Event
+
+**{{ snapshot.title }}**
+
+**Question:** {{ snapshot.question }}
+
+**Description:** {{ snapshot.description }}
+
+**Category:** {{ snapshot.category }}
+
+## Current Market Prices ({{ snapshot.window.value }} before resolution)
+
+- YES price: {{ snapshot.yes_price_cents }}c (market implies {{ snapshot.yes_price_cents }}% chance of YES)
+- NO price: {{ snapshot.no_price_cents }}c (market implies {{ snapshot.no_price_cents }}% chance of NO)
+
+## Your Decision
+
+Based on your behavioral profile, the market data above, and your available balance of ${{ "%.2f"|format(balance) }}, decide:
+
+1. **Action**: BUY YES, BUY NO, or SKIP
+2. **Stake**: How many dollars to risk (0 if SKIP)
+3. **Reasoning**: Why this decision reflects your analytical approach
