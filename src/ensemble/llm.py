@@ -2,16 +2,20 @@
 
 Uses gpt-5-nano with Pydantic v2 structured outputs to guarantee
 parseable PersonaDecision responses. No web search tools are provided.
+
+Note: gpt-5-nano does not support `temperature`. Persona divergence is
+achieved entirely through system prompt engineering — each persona has
+explicit decision rules, stake ranges, and skip thresholds.
 """
 
 from __future__ import annotations
 
-from openai import AsyncOpenAI
+from openai import AsyncOpenAI, BadRequestError, RateLimitError, APITimeoutError, APIConnectionError
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
-from openai import RateLimitError, APITimeoutError, APIConnectionError
 
-from ensemble.models import EventSnapshot, PersonaDecision
+from ensemble.models import Action, PersonaDecision
 from ensemble.personas import PersonaConfig, render_system_prompt, render_user_prompt
+from ensemble.models import EventSnapshot
 
 
 RETRYABLE_ERRORS = (RateLimitError, APITimeoutError, APIConnectionError)
@@ -28,7 +32,6 @@ async def call_persona(
     snapshot: EventSnapshot,
     balance: float,
     model: str = "gpt-5-nano",
-    temperature: float = 0.7,
 ) -> PersonaDecision:
     """Call the LLM as a specific persona and return a structured decision.
 
@@ -38,7 +41,6 @@ async def call_persona(
         snapshot: LLM-safe market data (no outcome)
         balance: Current portfolio balance for this persona
         model: Model ID to use
-        temperature: Sampling temperature (higher = more persona variance)
 
     Returns:
         PersonaDecision with action, stake_dollars, and reasoning
@@ -50,14 +52,13 @@ async def call_persona(
         model=model,
         instructions=system_prompt,
         input=user_prompt,
-        temperature=temperature,
         text_format=PersonaDecision,
     )
 
     decision = response.output_parsed
 
     # Enforce stake constraints
-    if decision.action == "SKIP":
+    if decision.action == Action.SKIP:
         decision.stake_dollars = 0.0
     decision.stake_dollars = min(decision.stake_dollars, balance)
     decision.stake_dollars = max(decision.stake_dollars, 0.0)
