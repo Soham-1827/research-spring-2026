@@ -94,7 +94,7 @@ def write_decisions_jsonl(records: list[DecisionRecord], path: Path) -> None:
     File is opened in append mode so multiple blind phases accumulate.
     """
     path.parent.mkdir(parents=True, exist_ok=True)
-    with open(path, "a") as f:
+    with open(path, "a", encoding="utf-8") as f:
         for record in records:
             f.write(record.model_dump_json() + "\n")
 
@@ -105,7 +105,7 @@ def write_reveal_jsonl(reveal: RevealRecord, path: Path) -> None:
     Reveal records are tagged with type='reveal' to distinguish from decisions.
     """
     path.parent.mkdir(parents=True, exist_ok=True)
-    with open(path, "a") as f:
+    with open(path, "a", encoding="utf-8") as f:
         data = reveal.model_dump(mode="json")
         data["record_type"] = "reveal"
         f.write(json.dumps(data, default=str) + "\n")
@@ -114,7 +114,7 @@ def write_reveal_jsonl(reveal: RevealRecord, path: Path) -> None:
 def load_decisions_jsonl(path: Path) -> list[DecisionRecord]:
     """Load all decision records from a JSONL file (skips reveal records)."""
     records = []
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if not line:

@@ -96,14 +96,16 @@ def simulate(
     def on_event_start(i: int, event: Event) -> None:
         console.print(f"\n[bold cyan]Event {i+1}/{len(events)}: {event.event_ticker}[/bold cyan]")
         console.print(f"  {event.title[:60]}")
+        console.print(f"  [dim]Q: {event.question[:80]}[/dim]")
 
     def on_decisions(window: TimeWindowLabel, records: list[DecisionRecord]) -> None:
-        console.print(f"\n  [magenta]{window.value}[/magenta] — Blind phase complete:")
+        console.print(f"\n  [magenta]{window.value}[/magenta] — YES: {records[0].yes_price_cents}c / NO: {records[0].no_price_cents}c")
         for r in records:
             action_style = {"BUY_YES": "green", "BUY_NO": "red", "SKIP": "dim"}.get(r.action.value, "white")
+            reasoning_snippet = r.reasoning[:60].replace("\n", " ")
             console.print(
                 f"    [{action_style}]{r.action.value:7s}[/{action_style}] "
-                f"${r.stake_dollars:6.2f}  {r.persona_name}"
+                f"${r.stake_dollars:6.2f}  {r.persona_name}  [dim]— {reasoning_snippet}...[/dim]"
             )
 
     def on_event_complete(event: Event, records: list[DecisionRecord]) -> None:
