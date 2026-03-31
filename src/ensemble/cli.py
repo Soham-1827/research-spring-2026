@@ -160,6 +160,101 @@ def simulate(
     )
 
 
+@app.command()
+def evaluate(
+    decisions_file: Path = typer.Argument(..., help="Path to decisions.jsonl"),
+    events_file: Path = typer.Argument(..., help="Path to events JSON file"),
+    output_csv: Path = typer.Option("output/portfolio.csv", "--csv", help="Portfolio CSV output"),
+    balance: float = typer.Option(100.0, "--balance", help="Starting balance per persona"),
+) -> None:
+    """Evaluate decisions: settle bets, compute metrics, write portfolio CSV."""
+    from ensemble.metrics import compute_persona_metrics
+    from ensemble.portfolio import PortfolioTracker
+    from ensemble.simulator import load_decisions_jsonl
+
+    events = load_events(events_file)
+    decisions = load_decisions_jsonl(decisions_file)
+
+    # Build outcome lookup
+    outcomes = {e.event_ticker: e.outcome for e in events}
+
+    # Group decisions by persona, then by event
+    by_persona: dict[str, list[DecisionRecord]] = {}
+    for d in decisions:
+        by_persona.setdefault(d.persona_id, []).append(d)
+
+    # Build event order
+    event_order = []
+    seen = set()
+    for d in decisions:
+        if d.event_ticker not in seen:
+            event_order.append(d.event_ticker)
+            seen.add(d.event_ticker)
+
+    # Run portfolio tracker
+    tracker = PortfolioTracker(starting_balance=balance)
+    for persona_id in by_persona:
+        tracker.init_persona(persona_id)
+
+    for event_ticker in event_order:
+        if event_ticker not in outcomes:
+            console.print(f"[yellow]Warning: no outcome for {event_ticker}, skipping[/yellow]")
+            continue
+        event_decisions = [d for d in decisions if d.event_ticker == event_ticker]
+        tracker.process_event(event_decisions, outcomes[event_ticker], event_ticker)
+
+    # Write CSV
+    tracker.write_portfolio_csv(output_csv)
+    console.print(f"[green]Portfolio CSV written to {output_csv}[/green]\n")
+
+    # Compute and display metrics
+    table = Table(title="Persona Evaluation Results")
+    table.add_column("Persona", style="cyan")
+    table.add_column("Bets", justify="right")
+    table.add_column("Wins", justify="right", style="green")
+    table.add_column("Losses", justify="right", style="red")
+    table.add_column("Skips", justify="right", style="dim")
+    table.add_column("Accuracy", justify="right")
+    table.add_column("Skip Rate", justify="right")
+    table.add_column("Brier", justify="right")
+    table.add_column("Balance", justify="right")
+    table.add_column("ROI", justify="right")
+
+    for persona_id, persona_decisions in sorted(by_persona.items()):
+        name = persona_decisions[0].persona_name
+        metrics = compute_persona_metrics(
+            persona_id=persona_id,
+            persona_name=name,
+            decisions=persona_decisions,
+            outcomes=outcomes,
+            starting_balance=balance,
+            final_balance=tracker.balances.get(persona_id, balance),
+        )
+
+        roi_style = "green" if metrics.roi_pct >= 0 else "red"
+        table.add_row(
+            metrics.persona_name,
+            str(metrics.total_bets),
+            str(metrics.wins),
+            str(metrics.losses),
+            str(metrics.total_skips),
+            f"{metrics.accuracy_pct:.1f}%",
+            f"{metrics.skip_rate_pct:.1f}%",
+            f"{metrics.brier_score:.4f}",
+            f"${metrics.final_balance:.2f}",
+            f"[{roi_style}]{metrics.roi_pct:+.1f}%[/{roi_style}]",
+        )
+
+    console.print(table)
+
+    # Best/worst summary
+    sorted_personas = sorted(by_persona.keys(), key=lambda p: tracker.balances.get(p, 0), reverse=True)
+    best = sorted_personas[0]
+    worst = sorted_personas[-1]
+    console.print(f"\n[bold]Best performer:[/bold] {best} (${tracker.balances[best]:.2f})")
+    console.print(f"[bold]Worst performer:[/bold] {worst} (${tracker.balances[worst]:.2f})")
+
+
 @app.command(name="contamination-check")
 def contamination_check(
     events_file: Path = typer.Argument(..., help="Path to events JSON file"),
