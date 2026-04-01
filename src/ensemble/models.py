@@ -97,6 +97,27 @@ class RevealRecord(BaseModel):
     timestamp: datetime
 
 
+class CouncilResponse(BaseModel):
+    """Structured response from a persona during the council debate phase.
+
+    Contains both the debate argument and a revised decision.
+    """
+
+    debate_argument: str = Field(
+        description="Natural rebuttal addressing other personas by name"
+    )
+    revised_action: Action = Field(description="BUY_YES, BUY_NO, or SKIP after debate")
+    revised_stake_dollars: float = Field(
+        ge=0, description="Revised stake amount (0 if SKIP)"
+    )
+    changed_mind: bool = Field(
+        description="True if the revised decision differs from the blind decision"
+    )
+    reasoning: str = Field(
+        description="Why the persona kept or changed their position after debate"
+    )
+
+
 class MarketCandle(BaseModel):
     """A single candlestick data point from Kalshi market history."""
 
