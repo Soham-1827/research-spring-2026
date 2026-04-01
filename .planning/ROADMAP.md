@@ -12,10 +12,11 @@ This roadmap delivers a Python CLI research tool that simulates prediction marke
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Data Foundation** - Market data models, ingestion pipeline, 15-event benchmark dataset with contamination checks
-- [ ] **Phase 2: Persona Engine** - Behavioral bias persona definitions, Jinja2 prompt templates, config-driven persona registry
-- [ ] **Phase 3: Simulation Engine** - Blind-phase async LLM orchestration, structured decision output, decision serialization, reveal logging
-- [ ] **Phase 4: Portfolio & Evaluation** - Kalshi pricing math, portfolio tracking, calibration metrics, results reporting
+- [x] **Phase 1: Data Foundation** - Market data models, ingestion pipeline, 15-event benchmark dataset with contamination checks
+- [x] **Phase 2: Persona Engine** - Behavioral bias persona definitions, Jinja2 prompt templates, config-driven persona registry
+- [x] **Phase 3: Simulation Engine** - Blind-phase async LLM orchestration, structured decision output, decision serialization, reveal logging
+- [x] **Phase 4: Portfolio & Evaluation** - Kalshi pricing math, portfolio tracking, calibration metrics, results reporting
+- [ ] **Phase 5: Council Debate** - Round-table debate after blind phase, targeted rebuttals between personas, dual portfolio tracking (blind vs council), debate transcript output
 
 ## Phase Details
 
@@ -79,14 +80,31 @@ Plans:
 - [ ] 04-01: TBD
 - [ ] 04-02: TBD
 
+### Phase 5: Council Debate
+**Goal**: Researcher can compare independent persona decisions against post-debate revised decisions to study whether group deliberation improves or worsens prediction market performance
+**Depends on**: Phase 3, Phase 4
+**Requirements**: CNCL-01, CNCL-02, CNCL-03, CNCL-04, CNCL-05
+**Success Criteria** (what must be TRUE):
+  1. After each blind phase, all 6 personas engage in a targeted round-table debate where each persona directly addresses opposing personas by name with natural rebuttals
+  2. Each persona produces a revised decision (action + stake + changed_mind flag) after seeing and responding to others' arguments
+  3. Both blind and council portfolios are tracked independently — the `evaluate` command reports side-by-side comparison of returns
+  4. Debate transcripts are saved as readable Markdown files in `output/debates/` for research review
+  5. Council decisions are serialized to `decisions.jsonl` with `phase="council"` for offline re-evaluation
+**Plans**: TBD
+
+Plans:
+- [ ] 05-01: Council debate models, Jinja2 debate template, council orchestrator module
+- [ ] 05-02: Dual portfolio tracking, CLI updates, debate markdown output, tests
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 3 -> 4
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Data Foundation | 0/3 | Planning complete | - |
-| 2. Persona Engine | 0/TBD | Not started | - |
-| 3. Simulation Engine | 0/TBD | Not started | - |
-| 4. Portfolio & Evaluation | 0/TBD | Not started | - |
+| 1. Data Foundation | 3/3 | Complete | 2026-03-31 |
+| 2. Persona Engine | 1/1 | Complete | 2026-03-31 |
+| 3. Simulation Engine | 1/1 | Complete | 2026-03-31 |
+| 4. Portfolio & Evaluation | 1/1 | Complete | 2026-03-31 |
+| 5. Council Debate | 0/2 | Not started | - |

@@ -33,6 +33,14 @@
 - [ ] **PORT-03**: Calibration metrics computed per persona: Brier score, prediction accuracy %, and ROI over the 15-event benchmark
 - [ ] **PORT-04**: Skip rate reported separately per persona — total markets skipped and as a percentage of all markets entered
 
+### Council Debate
+
+- [ ] **CNCL-01**: Council phase: after each blind phase, all 6 personas see every other persona's position (action, stake, reasoning) and engage in a structured round-table debate — each persona addresses at least one other persona by name in a natural rebuttal
+- [ ] **CNCL-02**: Each persona produces a revised decision (action + stake + reasoning) after the debate round, along with a `changed_mind` flag indicating whether the debate altered their position
+- [ ] **CNCL-03**: Dual portfolio tracking — both "blind" (solo decisions) and "council" (post-debate revised decisions) portfolios are maintained and settled separately, enabling direct comparison of independent vs. group decision-making
+- [ ] **CNCL-04**: Council debate transcripts are saved as readable Markdown files in `output/debates/` — one file per event per window, containing the full debate exchange for research review
+- [ ] **CNCL-05**: Council decisions are serialized to `decisions.jsonl` with `phase="council"` tag, separate from blind-phase decisions, enabling independent re-evaluation without API calls
+
 ## v2 Requirements
 
 ### Ensemble Enhancement
@@ -80,12 +88,17 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PORT-02 | Phase 4 | Pending |
 | PORT-03 | Phase 4 | Pending |
 | PORT-04 | Phase 4 | Pending |
+| CNCL-01 | Phase 5 | Pending |
+| CNCL-02 | Phase 5 | Pending |
+| CNCL-03 | Phase 5 | Pending |
+| CNCL-04 | Phase 5 | Pending |
+| CNCL-05 | Phase 5 | Pending |
 
 **Coverage:**
-- v1 requirements: 16 total
-- Mapped to phases: 16
+- v1 requirements: 21 total (16 original + 5 council)
+- Mapped to phases: 21
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-02-22*
-*Last updated: 2026-02-22 after initial definition*
+*Last updated: 2026-04-01 after council debate phase addition*

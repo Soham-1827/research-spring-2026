@@ -29,7 +29,7 @@ Determine whether LLMs with diverse behavioral biases, reasoning independently t
 ### Out of Scope
 
 - Web search in LLM calls — prevents outcome contamination, core to research integrity
-- Moderator/synthesis agent — v2 after baseline personas are validated
+- Council debate: round-table discussion where personas address each other by name, then revise decisions (Phase 5, in progress)
 - Web UI dashboard — v2
 - Live Kalshi trading integration — research only, historical data
 - Multi-model ensemble (GPT-4, Gemini) — v2; v1 uses one model with different system prompts
@@ -60,6 +60,8 @@ Determine whether LLMs with diverse behavioral biases, reasoning independently t
 | Multiple time windows per event | Lets us study whether personas enter at different times and what that means for returns | — Pending |
 | Historical Kalshi data (not synthetic) | Real market data = real pricing, real complexity, grounded evaluation | — Pending |
 | Skip option for personas | Reflects real trading discipline; prevents forced low-confidence bets | — Pending |
+| Council debate after blind phase | Core research question: does group deliberation improve or worsen predictions? Dual portfolio tracking enables direct comparison | — Pending |
+| 1-round debate with targeted rebuttals | Balances depth vs API cost; personas address each other by name for natural discussion | — Pending |
 
 ---
 *Last updated: 2026-02-22 after initialization*
