@@ -38,7 +38,7 @@ def load(
     table = Table(title="Event Snapshots")
     table.add_column("Event Ticker", style="cyan")
     table.add_column("Window", style="magenta")
-    table.add_column("Question", max_width=50)
+    table.add_column("Question")
     table.add_column("YES ¢", justify="right", style="green")
     table.add_column("NO ¢", justify="right", style="red")
 
@@ -50,7 +50,7 @@ def load(
                 table.add_row(
                     snap.event_ticker,
                     snap.window.value,
-                    snap.question[:50],
+                    snap.question,
                     str(snap.yes_price_cents),
                     str(snap.no_price_cents),
                 )
